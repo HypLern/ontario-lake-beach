@@ -16,7 +16,7 @@ isNS6 = (!document.all && document.getElementById) ? true : false;
 var dir;
 // very important, can't do writing in other functions without this variable being set to true in initial onDeviceReady function
 var deviceReady = false;
-// myPath is also set at the moment that onDeviceReady cums
+// myPath is also set at the moment that onDeviceReady comes to life
 var myPath;
 // loadReady is created onload
 var loadReady = false;
