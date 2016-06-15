@@ -16,7 +16,7 @@ isNS6 = (!document.all && document.getElementById) ? true : false;
 var dir;
 // very important, can't do writing in other functions without this variable being set to true in initial onDeviceReady function
 var deviceReady = false;
-// myPath is also set at the moment that onDeviceReady comes to life
+// myPath is also set at the moment that onDeviceReady cums
 var myPath;
 // loadReady is created onload
 var loadReady = false;
@@ -103,7 +103,6 @@ function onDeviceReady() {
       indexpath = textparts[0];
       indexauthor = textparts[1];
       indextext = textparts[2];
-      //document.getElementById("log_d").innerHTML = "sniting targetfile";
       var targetfile = "texts/" + language_key + "/" + indexauthor + "_" + indextext + "/text_" + curpint + "_" + curaudio + ".htm#" + bookmark;
       // first write the current chosen file to "lastchosen"
       dir.getFile("lastchosen", { create: true }, function (lastchosenfile) {
@@ -112,26 +111,19 @@ function onDeviceReady() {
           fileWriter.write(targetfile);
         }, fail);
       });
-      //document.getElementById("log_e").innerHTML = "snote targetfile";
-      //document.getElementById("log_f").innerHTML = "snote " + targetfile;
-      //document.getElementById("log_g").innerHTML = "<br><br>";
     }
   
     // load optionHash
     dir.getFile("optionhash", { create: true }, function (file) {
-      //document.getElementById("log_d").innerHTML = "Checking optionhash file";
       var textObj = file;
       textObj.file(function (file) {
         var reader = new FileReader();
         reader.onloadend = function (e) {
-          //document.getElementById("log_e").innerHTML = "starting read";
           var textdata = this.result;
           if (textdata !== null && textdata !== undefined && textdata !== "") {
-            //document.getElementById("log_f").innerHTML = textdata;
             // found optionhash file, dissecting contents into optionHash
             var textparts = textdata.split(',');
             var itemnumber = 0;
-            //document.getElementById("log_g").innerHTML = "reading";
             for (itemnumber = 0; itemnumber < textparts.length; itemnumber++) {
               itemparts = textparts[itemnumber].split('=');
               optionHash[itemparts[0]] = itemparts[1];
@@ -176,7 +168,6 @@ function onDeviceReady() {
                   bookmark = "page" + wordmarkstringparts[0];
                   // turn autosave off if we're here only for words and not for reading
                   autosave = "off";
-                  //document.getElementById("log_d").innerHTML = "Trying to go to " + "text_" + curpint + "_" + curaudio + ".htm#" + word_id;
                   //go to word after timeout, this number should be editable for slow phones, 100 is too small for mine
                   toggleDirect("text_" + curpint + "_" + curaudio + ".htm#" + word_id,"","scroll",300);
                 }
@@ -189,8 +180,7 @@ function onDeviceReady() {
               }
             }
 
-          } else {	
-            //document.getElementById("log_f").innerHTML = "no contents";
+          } else {
             
             textObj.createWriter(function (fileWriter) {
               // writing to optionhash file, dissecting optionHash into textdata
@@ -214,12 +204,10 @@ function onDeviceReady() {
               // auto play if this was refresh
               var autoaudio = hash.substring(hash.indexOf("#playpage")+9);
               //alert(autoaudio);
-              //document.getElementById("log_j").innerHTML = "Going ter new page with hash " + hash + "<br>";
               if (autoaudio > 0) {
                 firstTry = false;
                 // this was refresh, play page
                 var autopage = audioToPageArray[autoaudio];
-                //document.getElementById("log_devicekeys").innerHTML = "play audio page " + autoaudio + " on actual page " + autopage;
                 playAudio('pageplay',autoaudio,autopage);
               }
               //texts/hun/Moricz_AVegekJulija/text_int_man.htm#wordpage2___word_id___mean_id
@@ -242,7 +230,6 @@ function onDeviceReady() {
                   bookmark = "page" + wordmarkstringparts[0];
                   // turn autosave off if we're here only for words and not for reading
                   autosave = "off";
-                  //document.getElementById("log_d").innerHTML = "Trying to go to " + "text_" + curpint + "_" + curaudio + ".htm#" + word_id;
                   //go to word after timeout, this number should be editable for slow phones, 100 is too small for mine
                   toggleDirect("text_" + curpint + "_" + curaudio + ".htm#" + word_id,"","scroll",300);
                 }
@@ -343,7 +330,6 @@ target.style.cursor = "default"
 }
 
 function fail(e) {
-  document.getElementById("log_d").innerHTML = "error<br><br>";
   if (document.getElementById("wholething").style.visibility === "hidden") {
     document.getElementById("wholething").style.visibility='visible';
   }
@@ -540,7 +526,6 @@ function initTime() {
   duration = document.getElementById("AltPlayPage").duration;
   currenttime = document.getElementById("AltPlayPage").currentTime;
   if (null != duration && undefined != duration && NaN != duration && null != currenttime && undefined != currenttime && NaN != currenttime && duration > 0 && currenttime > 0 && duration != currenttime) {
-    //document.getElementById("log_g").innerHTML = "Audio file duration is " + duration + ", currenttime is " + currenttime + "...";
     playTimeout = setTimeout(audioEnded,((duration*1000)-(currenttime*1000)));
     retryCounter = 0;
     clearTimeout(initTimeout);
@@ -551,8 +536,6 @@ function initTime() {
     if ( ( ( currentPlaying * 1 ) + 1 ) < ( lastaudio * 1 ) ) {
       retryCounter = retryCounter + 1;
       clearTimeout(initTimeout);
-      //document.getElementById("log_g").innerHTML = "Error: Audio file duration is " + duration + ", currenttime is " + currenttime + ", retry is " + retryCounter;
-      //initTimeout = setTimeout(initTime,1000);
       //refresh whole page to get audio working, unless we're offline!
       if(navigator.onLine && !appOffline && firstTry){
         if ( optionHash["audioScroll"] === "Page" ) {
@@ -589,7 +572,6 @@ function audioEnded() {
     // make this optional
     // auto page aligning when playing all
     page_id = audioToPageArray[audio_id]; // specific array to avoid picture pages
-    //document.getElementById("log_f").innerHTML = "Audio file " + currentPlaying + " ended and curaudio is all...";
     if ( optionHash["audioScroll"] === "Page" ) {
       playAudio('pageplay',audio_id,page_id);
     } else {
@@ -597,7 +579,7 @@ function audioEnded() {
       playAudio('play',audio_id,'dummy');
     }
   } else {
-    //document.getElementById("log_f").innerHTML = "Audio file " + currentPlaying + " ended...";
+    //toggleDirect("","Audio file " + currentPlaying + " ended...","FadeOff",2000);
   }
 }
 function stopall() {
@@ -625,7 +607,7 @@ function clickPage(page_id,audio_id,audio_id_last,audio_id_next) {
     document.getElementById("wholething").style.visibility='visible';
   }
   
-  //document.getElementById("log_d").innerHTML = "Whats happening: x=" + x + ", y=" + y + ", w=" + w + ", h=" + h;
+  //toggleDirect("","Whats happening: x=" + x + ", y=" + y + ", w=" + w + ", h=" + h,"FadeOff",2000);
   if (x > 40 && x < 71 && y > 0 && y < 55) {
     toggleAudio(page_id);
     return false;
@@ -831,8 +813,6 @@ function addWord(word_id,mean_id,page_id) {
   seconds = seconds + ".dummytext";
   var splitSeconds = seconds.split(".");
   seconds = splitSeconds[0];
-  // need to do something with &#3; in character codes when writing words to words.js? for example always change &#<3 decimal(s)>; to &<3 decimal(s)>, when printing to screen change &<decimal(s)> to &#<decimal(s)>;
-  // or create code hash for certain languages... For now just write html chars
   // wordParts[1] is wordfreq and further parts might be(come) wordroot and wordrootfreq, these can be used to skip "easy" words
   var wordkey = seconds + "_" + wordParts[0] + "_" + wordParts[1] + ".txt";
   // as an experiment, I'm going to try to get the whole meaning instead of the literal
@@ -935,7 +915,6 @@ function bookMark(page_id) {
 function togglePopInt(page_id) {
   if (!showingMsg) {
     if (curpint === "int") {
-      //document.getElementById("log_devicekeys").innerHTML = "Tryin ter toggle text from int to pnt at page " + page_id;
       clearTimeout(clickTimeout);
       clickTimeout = setTimeout(function() {
         clickedPopInt = true;
@@ -944,7 +923,6 @@ function togglePopInt(page_id) {
       clickedPopInt = false;
     }
     if (curpint === "pnt") {
-      //document.getElementById("log_devicekeys").innerHTML = "Tryin ter toggle text from pnt to pop at page " + page_id;
       clearTimeout(clickTimeout);
       clickTimeout = setTimeout(function() {
         clickedPopInt = true;
@@ -953,7 +931,6 @@ function togglePopInt(page_id) {
       clickedPopInt = false;
     }
     if (curpint === "pop") {
-      //document.getElementById("log_devicekeys").innerHTML = "Tryin ter toggle text from pop to int at page " + page_id;
       clearTimeout(clickTimeout);
       clickTimeout = setTimeout(function() {
         clickedPopInt = true;
@@ -964,17 +941,14 @@ function togglePopInt(page_id) {
   } else {
     if (clickedPopInt) {
       if (curpint === "int") {
-        //document.getElementById("log_devicekeys").innerHTML = "Tryin ter toggle text from int to pop at page " + page_id;
         clickedPopInt = false;
         toggleDirect("text_pop_" + curaudio + ".htm#page" + page_id,"Switching to Text with Pop-ups.","fadeOn",defaultMsgTime);
       }
       if (curpint === "pnt") {
-        //document.getElementById("log_devicekeys").innerHTML = "Tryin ter toggle text from pnt to int at page " + page_id;
         clickedPopInt = false;
         toggleDirect("text_int_" + curaudio + ".htm#page" + page_id,"Switching to Interlinear Text.","fadeOn",defaultMsgTime);
       }
       if (curpint === "pop") {
-        //document.getElementById("log_devicekeys").innerHTML = "Tryin ter toggle text from pop to pnt at page " + page_id;
         clickedPopInt = false;
         toggleDirect("text_pnt_" + curaudio + ".htm#page" + page_id,"Switching to Pop-up Interlinear.","fadeOn",defaultMsgTime);
       }
@@ -984,7 +958,6 @@ function togglePopInt(page_id) {
 function toggleAudio(page_id) {
   if (!showingMsg) {
     if (curaudio === "all") {
-      //document.getElementById("log_devicekeys").innerHTML = "Tryin ter toggle audio from all to man";
       clearTimeout(clickTimeout);
       clickTimeout = setTimeout(function() {
         clickedAudio = true;
@@ -993,7 +966,6 @@ function toggleAudio(page_id) {
       clickedAudio = false;
     }
     if (curaudio === "man") {
-      //document.getElementById("log_devicekeys").innerHTML = "Tryin ter toggle audio from man to aut";
       clearTimeout(clickTimeout);
       clickTimeout = setTimeout(function() {
         clickedAudio = true;
@@ -1002,7 +974,6 @@ function toggleAudio(page_id) {
       clickedAudio = false;
     }
     if (curaudio === "aut") {
-      //document.getElementById("log_devicekeys").innerHTML = "Tryin ter toggle audio from aut to all";
       clearTimeout(clickTimeout);
       clickTimeout = setTimeout(function() {
         clickedAudio = true;
@@ -1013,17 +984,14 @@ function toggleAudio(page_id) {
   } else {
     if (clickedAudio) {
       if (curaudio === "all") {
-        //document.getElementById("log_devicekeys").innerHTML = "Tryin ter toggle audio from all to aut";
         clickedAudio = false;
         toggleDirect("text_" + curpint + "_aut.htm#page" + page_id,"Switching to Play Autopage.","fadeOn",defaultMsgTime);
       }
       if (curaudio === "man") {
-        //document.getElementById("log_devicekeys").innerHTML = "Tryin ter toggle audio from man to all";
         clickedAudio = false;
         toggleDirect("text_" + curpint + "_all.htm#page" + page_id,"Switching to Play All Pages.","fadeOn",defaultMsgTime);
       }
       if (curaudio === "aut") {
-        //document.getElementById("log_devicekeys").innerHTML = "Tryin ter toggle audio from aut to man";
         clickedAudio = false;
         toggleDirect("text_" + curpint + "_man.htm#page" + page_id,"Switching to Play Manually.","fadeOn",defaultMsgTime);
       }
@@ -1179,7 +1147,6 @@ function toggleDirect(targetPage,msgToShow,command,timeToShow) {
     // if targetPage is not empty, direct to page after timeout finishes
     clearTimeout(loadTimeout);
     if (targetPage !== "") {
-      //document.getElementById("log_g").innerHTML = "Setting msg timeout";
       loadTimeout = setTimeout(function() {
         top.location.href = targetPage;
         if (command === "scroll") {
@@ -1188,7 +1155,6 @@ function toggleDirect(targetPage,msgToShow,command,timeToShow) {
           // now check if this actually did something
           if (currentYPos === window.pageYOffset) {
             // nuttin happened, must be on F'n android, pluck element id apart
-            //document.getElementById("log_d").innerHTML = "Element is " + elem_id + ". ";
             var element_parts = elem_id.split('_');
             var element_main = element_parts[0];
             var element_number = element_parts[1];
@@ -1199,14 +1165,11 @@ function toggleDirect(targetPage,msgToShow,command,timeToShow) {
             zootjeParts = zootje.split('\-\->');
             zootje = zootjeParts[0];
             zootjeParts = zootje.split('_');
-            //document.getElementById("log_e").innerHTML = "First element on page is " + zootjeParts[1] + "_" + zootjeParts[2] + ". ";
             if ( element_number > ((zootjeParts[2]/1) + 10) ) {
               element_number = element_number - 10;
               elem_id = element_main + "_" + element_number;
-              //document.getElementById("log_f").innerHTML = "First element on page is " + zootjeParts[1] + "_" + zootjeParts[2] + ". That's more than ten less, if you know what I mean. Overruling to ten below chosen element. ";
               top.location.href = "text_" + curpint + "_" + curaudio + ".htm#" + elem_id;
             } else {
-              //document.getElementById("log_f").innerHTML = "Deciding to stay on top of page " + bookmark + ". ";
               top.location.href = "text_" + curpint + "_" + curaudio + ".htm#" + bookmark;
             }
           } else {
@@ -1256,9 +1219,6 @@ function interruptFade() {
 function onLoad() {
   loadReady = true;
   
-  // poppelepoo, if this is anything we need to set the font-size and type too!
-  //setStyle();
-    
   // to make sure current file is written to lastchosen, either onLoad or onDeviceReady will have to write it!
   if ( deviceReady === true && language_key === language_code ) {
     window.resolveLocalFileSystemURL(myPath, function (dir) {
@@ -1266,7 +1226,6 @@ function onLoad() {
       indexpath = textparts[0];
       indexauthor = textparts[1];
       indextext = textparts[2];
-      //document.getElementById("log_d").innerHTML = "writing targetfile";
       var targetfile = "texts/" + language_key + "/" + indexauthor + "_" + indextext + "/text_" + curpint + "_" + curaudio + ".htm#" + bookmark;
       // first write the current chosen file to "lastchosen"
       dir.getFile("lastchosen", { create: true }, function (lastchosenfile) {
@@ -1275,8 +1234,6 @@ function onLoad() {
           fileWriter.write(targetfile);
         }, fail);
       });
-      //document.getElementById("log_f").innerHTML = "wrote " + targetfile;
-      //document.getElementById("log_g").innerHTML = "<br><br>";
     });
   }
   if ( deviceReady === true ) {
@@ -1286,14 +1243,12 @@ function onLoad() {
     // auto play if this was refresh
     var autoaudio = hash.substring(hash.indexOf("#playpage")+9);
     //alert(autoaudio);
-    //document.getElementById("log_j").innerHTML = "Going ter new page with hash " + hash + "<br>";
     if (autoaudio > 0) {
       firstTry = false;
       //don't forget to change bookmark to regular page in case of audio play refresh entry
       bookmark = "page" + autopage;
       // this was refresh, play page
       var autopage = audioToPageArray[autoaudio];
-      //document.getElementById("log_devicekeys").innerHTML = "play audio page " + autoaudio + " on actual page " + autopage;
       playAudio('pageplay',autoaudio,autopage);
     }
     //texts/hun/Moricz_AVegekJulija/text_int_man.htm#wordpage2___word_id___mean_id
@@ -1316,14 +1271,13 @@ function onLoad() {
         bookmark = "page" + wordmarkstringparts[0];
         // turn autosave off if we're here only for words and not for reading
         autosave = "off";
-        //document.getElementById("log_d").innerHTML = "Frying to go to " + "text_" + curpint + "_" + curaudio + ".htm#" + word_id;
         //go to word after timeout, this number should be editable for slow phones, 100 is too small for mine
         toggleDirect("text_" + curpint + "_" + curaudio + ".htm#" + word_id,"","scroll",300);
       }
     }
     var pagego = hash.substring(hash.indexOf("#page")+5);
     if ( pagego > 0) {
-      console.log("crying to go to page " + pagego);
+      //console.log("crying to go to page " + pagego);
       page_id = pagego;
       top.location.href = "text_" + curpint + "_" + curaudio + ".htm#page" + page_id;
     }
