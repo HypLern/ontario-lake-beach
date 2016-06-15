@@ -1154,7 +1154,7 @@ function toggleDirect(targetPage,msgToShow,command,timeToShow) {
           window.scrollTo(0, window.pageYOffset - 200);
           // now check if this actually did something
           if (currentYPos === window.pageYOffset) {
-            // nuttin happened, must be on F'n android, pluck element id apart
+            // nuttin happened, must be on android, pluck element id apart
             var element_parts = elem_id.split('_');
             var element_main = element_parts[0];
             var element_number = element_parts[1];
